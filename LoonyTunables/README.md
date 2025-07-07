@@ -1,4 +1,4 @@
-## Background
+# Background
 
 ### LD.SO: dynamic linker/loader
 
@@ -26,7 +26,7 @@ To better understand how this vulnerability works, let’s have a look at how th
 
 The environment variable GLIBC_TUNABLES sets the maximum size chunk that may be stored in a tcache (in bytes).
 
-## Analysis
+# Analysis
 
 The __tunables_init function takes one argument, envp, which is a pointer to an array of strings representing the environment variables. While loop iterates through the environment variables. Calls get_next_env, which retrieves the next environment variable and updates the pointers envp, envname, len, and envval. Then it checks if a tunable name is “GLBIC TUNABLE” and if so, it will duplicate via strdup. If the duplication was successful, parse_tunables is called to parse the value part (envval) of this environment variable. And finally, update it to the new envp.
 
