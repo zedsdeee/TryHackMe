@@ -9,8 +9,8 @@ ELF (Executable and Linkable Format) is a standard file format for executable fi
 Usually, the required libraries are searched in a specific set of locations in the system, including the default /lib directory.
 
     $ldd /usr/bin/man
-
-Using DT_RPATH to Influence the Library Search Path
+    
+### Using DT_RPATH to Influence the Library Search Path
 
 When compiling a program, you can specify additional paths where you want ld.so to look for libraries. These directories will be embedded in your program’s ELF file and parsed and used by ld.so when loading the executable. This allows you to override the default library search path and have your program search in an alternate location first.
 
@@ -22,7 +22,7 @@ Whenever ld.so loads your executable, it will first check /tmp/ for libraries, t
 
 To better understand how this vulnerability works, let’s have a look at how the dynamic linker (ld.so) briefly works. Once it gets executed, it checks specific environment variables called GLIBC_TUNABLES. It is kind of a configuration file. Those features, aka Tunables, allow developers to dynamically alter the runtime library behavior.
 
-GLIBC_TUNABLES="malloc.check=1:malloc.tcache_max=128
+    GLIBC_TUNABLES="malloc.check=1:malloc.tcache_max=128
 
 The environment variable GLIBC_TUNABLES sets the maximum size chunk that may be stored in a tcache (in bytes).
 
