@@ -143,10 +143,10 @@ In order to prevent this code from buffer overflow. Replace potentially unsafe f
 
 In your specific case, you can replace
 
-while (*n != '\0') tunestr[off++] = *n++;
+    while (*n != '\0') tunestr[off++] = *n++;
 
 with something safer:
 
-while (*n != '\0' && off < BUFFER_SIZE - 1) tunestr[off++] = *n++;
+    while (*n != '\0' && off < BUFFER_SIZE - 1) tunestr[off++] = *n++;
 
 BUFFER_SIZE should be defined as the maximum size of tunestr.
