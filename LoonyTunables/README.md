@@ -1,8 +1,8 @@
 ## Background
 
-    LD.SO: dynamic linker/loader
+### LD.SO: dynamic linker/loader
 
-ELF (Executable and Linkable Format) is a standard file format for executable files, object code, shared libraries and core dumps. Whenever you execute an ELF file, OS will need to load lib and link them to executables so that any shared functions are available. In Linux, id.so manages an executable prepackaged as part of the glibc library.
+ELF (Executable and Linkable Format) is a standard file format for executable files, object code, shared libraries and core dumps. Whenever you execute an ELF file, OS will need to load lib and link them to executables so that any shared functions are available. In Linux, id.so manages an executable prepackaged as part of the glibc library. Glibc is the GNU Project implementation of the C standard library.
 
     $readelf /usr/bin/man -p .interp
 
@@ -10,7 +10,7 @@ Usually, the required libraries are searched in a specific set of locations in t
 
     $ldd /usr/bin/man
 
-    Using DT_RPATH to Influence the Library Search Path
+Using DT_RPATH to Influence the Library Search Path
 
 When compiling a program, you can specify additional paths where you want ld.so to look for libraries. These directories will be embedded in your program’s ELF file and parsed and used by ld.so when loading the executable. This allows you to override the default library search path and have your program search in an alternate location first.
 
