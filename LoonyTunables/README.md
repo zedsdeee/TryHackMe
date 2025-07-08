@@ -207,6 +207,6 @@ try 500
 root
 # cd /root
 # cat root.txt
-THM{TH-TH-THATS-SECURE-FOLKS!}
+THM{REDACTED}
 # exit
 ```
