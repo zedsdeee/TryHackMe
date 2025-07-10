@@ -1,5 +1,12 @@
 # TryHackMe: Sudo Security Bypass CVE-2019-14287 
 
+# Background: 
+	
+Runas specification: Runas refers to RUN AS a user. So Runas specification means it can be run as a specific user.
+
+Sudo: Sudo (su “do”) allows a system administrator to delegate authority to give certain users (or groups of users) the ability to run some (or all) commands as root or another user while providing an audit trail of the commands and their arguments. -u option is used to set a user’s privilege level. For example, if you wanna run whoami command with uid=1234, then you can do like this; $ sudo -u#1234 whoami
+
+
 # PoC
 ```
 tryhackme@sudo-privesc:~$ sudo -l
