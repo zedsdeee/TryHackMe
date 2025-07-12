@@ -71,6 +71,7 @@ name=test&password1=test
 ```
 ReferenceError: /home/web/app/views/settings.ejs:14
 ```
+# CVE-2022–29078
 
 https://security.snyk.io/vuln/SNYK-JS-EJS-2803307
 
@@ -116,6 +117,9 @@ Matching Defaults entries for web on cyprusbank:
 
 User web may run the following commands on cyprusbank:
     (root) NOPASSWD: sudoedit /etc/nginx/sites-available/admin.cyprusbank.thm
+
+# CVE-2023–22809
+
 $ sudoedit -V
 Sudo version 1.9.12p1
 Sudoers policy plugin version 1.9.12p1
