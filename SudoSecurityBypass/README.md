@@ -1,5 +1,7 @@
 # TryHackMe: Sudo Security Bypass CVE-2019-14287 
 
+https://tryhackme.com/room/sudovulnsbypass
+
 # Background: 
 	
 Runas specification: Runas refers to RUN AS a user. So Runas specification means it can be run as a specific user.
