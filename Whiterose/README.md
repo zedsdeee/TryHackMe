@@ -4,7 +4,7 @@ https://tryhackme.com/room/whiterose
 
 # Enumeration
 
-add <machine ip> to /etc/hosts 
+add machine ip cyprusbank.thm to /etc/hosts, unless it's not working.
 
 ```
 ffuf -u http://10.10.116.234/ -H "Host:FUZZ.cyprusbank.thm" -w ~/Downloads/wordlists/subdomains-top1million-5000.txt -fw 1
