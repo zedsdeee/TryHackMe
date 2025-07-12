@@ -45,7 +45,7 @@ change it to like say ?c=10 and it reveals a secret message.
 http://admin.cyprusbank.thm/messages/?c=10
 ```
 
-## Gayle Bev: p~]P@5!6;rs558:q
+##### Gayle Bev: p~]P@5!6;rs558:q
 
 
 Using Burp Suite to intercept the request, modify the password parameter and observe an error message indicating that EJS files are being used.
