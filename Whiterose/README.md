@@ -41,10 +41,9 @@ fuzzing some possible subdomains. and found interesting subdomain. Next, access 
 On message page, assume that Gayle Bev is admin, and there is a interesting parameter ?c=5. 
 
 change it to like say ?c=10 and it reveals a secret message.
-
-'''
+```
 http://admin.cyprusbank.thm/messages/?c=10
-'''
+```
 
 ## Gayle Bev: p~]P@5!6;rs558:q
 
