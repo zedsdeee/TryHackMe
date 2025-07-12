@@ -45,7 +45,7 @@ change it to like say ?c=10 and it reveals a secret message.
 http://admin.cyprusbank.thm/messages/?c=10
 ```
 
-##### Gayle Bev: p~]P@5!6;rs558:q
+##### Gayle Bev: [REDACTED]
 
 
 Using Burp Suite to intercept the request, modify the password parameter and observe an error message indicating that EJS files are being used.
@@ -110,7 +110,7 @@ $ ls
 app
 user.txt
 $ cat user.txt
-THM{4lways_upd4te_uR_d3p3nd3nc!3s}
+THM{REDACTED}
 ```
 
 # PE
@@ -141,7 +141,7 @@ vi -- /root/root.txt
 $     sudo sudoedit /etc/nginx/sites-available/admin.cyprusbank.thm
 ```
 ```
-THM{4nd_uR_p4ck4g3s}
+THM{REDACTED}
 ~                                                                               
 ~                                                                               
 ~                                                                               
