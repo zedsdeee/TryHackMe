@@ -1,3 +1,5 @@
+# CVE-2016-5195 Dirty cow kernel exploit race condition  
+
 Introduction
 
 The vulnerability “Dirty Cow” came from the “dirty” bit and copy-on-write(COW). Dirty Cow is a vulnerability that occurs in the kernel’s memory subsystem so as to race condition. A race condition vulnerability was found in the way the Linux kernel’s memory subsystem handled the copy-on-write breakage of private read-only memory mappings. It deliberately creates an error during copy-on-write by repeating the processes and it tricks the kernel into actually writing to the underlying file.
