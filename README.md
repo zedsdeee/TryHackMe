@@ -1,1 +1,1 @@
-# TryHackMesome tryhackme writeups
+### some random tryhackme writeups
